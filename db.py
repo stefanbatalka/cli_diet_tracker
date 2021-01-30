@@ -2,6 +2,8 @@ from pymongo import MongoClient
 
 from auth import db_uri
 
+from datetime import datetime
+
 import food
 
 
@@ -12,6 +14,7 @@ class FoodFactory:
         self.master = MongoClient(db_uri)["diettracker"]
         self.food_db = self.master["foods"]
         self.meal_db = self.master["meals"]
+        self.consumed = self.master["consumed"]
 
     def add_food(self, food: food.Food):
         self.food_db.insert_one(food.__dict__)
@@ -24,6 +27,11 @@ class FoodFactory:
     
     def remove_meal(self, uid):
         self.meal_db.remove({"_id": uid})
+
+    def consume(self, to_consume: dict, consumption_time = None):
+        to_consume["consumed_at"] = datetime.now() if consumption_time is None else consumption_time
+
+        self.consumed.insert_one(to_consume)
 
     def get_all_foods(self):
         all_foods = self.food_db.find({})
@@ -39,6 +47,8 @@ class FoodFactory:
 
     def get_all_meals_by_day(self):
         raise NotImplementedError
+
+    
 
 if __name__ == "__main__":
 

@@ -1,7 +1,6 @@
 from datetime import datetime 
 
 class Food:
-
     def __init__(self, name, protein, carbs, fat, cals):
         self.name = name
         self.protein = protein
@@ -42,6 +41,8 @@ if __name__ == "__main__":
     print(test_food_1)
     print(test_food_2)
     print(test_meal_1)
+
+    print(test_food_1.__dict__)
 
 
 

@@ -1,4 +1,5 @@
-from datetime import datetime 
+from datetime import datetime
+
 
 class Food:
     def __init__(self, name, protein, carbs, fat, cals):
@@ -11,11 +12,11 @@ class Food:
     def __repr__(self):
         return f"<Food({self.name} - P: {self.protein}, C: {self.carbs}, F: {self.fat}, Calories: {self.cals}>"
 
-class Meal:
 
-    def __init__(self, name, foods:list):
+class Meal:
+    def __init__(self, name, foods: list):
         self.name = name
-        #self.foods = foods
+        # self.foods = foods
         self.protein = 0
         self.carbs = 0
         self.fat = 0
@@ -42,7 +43,3 @@ if __name__ == "__main__":
     print(test_meal_1)
 
     print(test_food_1.__dict__)
-
-
-
-

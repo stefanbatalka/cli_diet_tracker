@@ -7,9 +7,7 @@ from datetime import datetime
 import food
 
 
-
 class FoodFactory:
-
     def __init__(self):
         self.master = MongoClient(db_uri)["diettracker"]
         self.food_db = self.master["foods"]
@@ -24,16 +22,18 @@ class FoodFactory:
 
     def remove_food(self, uid):
         self.food_db.remove({"_id": uid})
-    
+
     def remove_meal(self, uid):
         self.meal_db.remove({"_id": uid})
 
-    def consume(self, to_consume: dict, consumption_time = None):
-        to_consume["consumed_at"] = datetime.now() if consumption_time is None else consumption_time
-        
+    def consume(self, to_consume: dict, consumption_time=None):
+        to_consume["consumed_at"] = (
+            datetime.now() if consumption_time is None else consumption_time
+        )
+
         if "_id" in to_consume:
-            del to_consume['_id']
-        
+            del to_consume["_id"]
+
         self.consumed.insert_one(to_consume)
 
     def get_all_foods(self):
@@ -41,7 +41,7 @@ class FoodFactory:
 
         for food in all_foods:
             yield food
-        
+
     def get_all_meals(self):
         all_meals = self.meal_db.find()
 
@@ -51,7 +51,6 @@ class FoodFactory:
     def get_all_macros_by_day(self):
         raise NotImplementedError
 
-    
 
 if __name__ == "__main__":
 
@@ -64,4 +63,3 @@ if __name__ == "__main__":
     print("All meals")
     for meal in factory.get_all_meals():
         print(meal)
-

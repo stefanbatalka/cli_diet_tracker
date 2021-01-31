@@ -30,7 +30,10 @@ class FoodFactory:
 
     def consume(self, to_consume: dict, consumption_time = None):
         to_consume["consumed_at"] = datetime.now() if consumption_time is None else consumption_time
-
+        
+        if "_id" in to_consume:
+            del to_consume['_id']
+        
         self.consumed.insert_one(to_consume)
 
     def get_all_foods(self):
@@ -45,7 +48,7 @@ class FoodFactory:
         for meal in all_meals:
             yield meal
 
-    def get_all_meals_by_day(self):
+    def get_all_macros_by_day(self):
         raise NotImplementedError
 
     

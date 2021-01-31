@@ -9,11 +9,11 @@ class Food:
         self.cals = cals
 
     def __repr__(self):
-        return f"<Food({self.name} - P: {self.protein}, C: {self.carbs}, F: {self.fat}, Calories: {self.cals}"
+        return f"<Food({self.name} - P: {self.protein}, C: {self.carbs}, F: {self.fat}, Calories: {self.cals}>"
 
 class Meal:
 
-    def __init__(self, name, *foods):
+    def __init__(self, name, foods:list):
         self.name = name
         self.foods = foods
         self.protein = 0
@@ -28,14 +28,14 @@ class Meal:
             self.cals += food.cals
 
     def __repr__(self):
-        return f"<Meal({self.name} - P: {self.protein}, C: {self.carbs}, F: {self.fat}, Calories: {self.cals}"
+        return f"<Meal({self.name} - P: {self.protein}, C: {self.carbs}, F: {self.fat}, Calories: {self.cals}>"
 
 
 if __name__ == "__main__":
     test_food_1 = Food("Food 1", 20, 10, 5, 500)
     test_food_2 = Food("Food 2", 40, 20, 10, 1000)
 
-    test_meal_1 = Meal("Meal 1", test_food_1, test_food_2)
+    test_meal_1 = Meal("Meal 1", [test_food_1, test_food_2])
 
     print(test_food_1)
     print(test_food_2)
